@@ -1,0 +1,83 @@
+﻿@model AdministrationDataBaseData.Models.Session
+
+@{
+    ViewData["Title"] = "Create Session";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Subheader
+{
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor fw-bold" style="color: #777777;">@AdministrationDataBase.Resources.Resource.CreateSession</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-end">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb justify-content-end">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "PilatesCustomer")">@AdministrationDataBase.Resources.Resource.Start</a></li>
+                    <li class="breadcrumb-item active">@AdministrationDataBase.Resources.Resource.CreateSession</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body d-flex justify-content-center">
+        <form asp-action="CreateSession" method="post" class="w-50" asp-controller="Session">
+            <input type="hidden" name="IdPilatesCustomer" value="@ViewBag.IdPilatesCustomer" />
+            <div class="form-group row">
+                <label for="SessionDate" class="col-md-4 col-form-label fw-bold">Date and Time of the Session</label>
+                <div class="col-md-8">
+                    <input type="datetime-local" class="form-control" id="SessionDate" name="SessionDate" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="SessionObservations" class="fw-bold">Session Observations</label>
+                <div class="col-md-12">
+                    <textarea class="form-control" id="SessionObservations" name="SessionObservations" rows="5"></textarea>
+                    <span asp-validation-for="SessionObservations" class="text-danger"></span>
+                </div>
+            </div>
+            <input type="hidden" name="IdPilatesCustomer" value="@ViewBag.IdPilatesCustomer" />
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="@Url.Action("DetailsPilatesCustomer", "PilatesCustomer", new { id = ViewBag.IdPilatesCustomer })" class="btn btn-info">
+                    @AdministrationDataBase.Resources.Resource.Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("form").validate({
+                rules: {
+                    SessionObservations: {
+                        required: true
+                    }
+                },
+                messages: {
+                    SessionObservations: {
+                        required: "The session observations field is required"
+                    }
+                },
+                errorElement: "div",
+                errorClass: "text-danger",
+                highlight: function (element) {
+                    $(element).addClass("is-invalid");
+                },
+                unhighlight: function (element) {
+                    $(element).removeClass("is-invalid");
+                },
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element);
+                }
+            });
+        });
+    </script>
+}

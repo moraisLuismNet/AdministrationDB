@@ -1,0 +1,127 @@
+﻿@using AdministrationDataBaseData.Models
+@model IEnumerable<User>
+@Html.AntiForgeryToken()
+
+@{
+    ViewData["Title"] = AdministrationDataBase.Resources.Resource.Users;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Subheader
+{
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor fw-bold" style="color: #777777;">@AdministrationDataBase.Resources.Resource.Users</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-end">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb justify-content-end">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@AdministrationDataBase.Resources.Resource.Start</a></li>
+                    <li class="breadcrumb-item active">@AdministrationDataBase.Resources.Resource.Users</li>
+                   
+                </ol>
+                <a href="@Url.Action("CreateUser", "User")" class="btn btn-primary d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> @AdministrationDataBase.Resources.Resource.NewUser</a>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="DataTable" class="table table-borderless table-striped mb-0 dataTable no-footer table-hover display nowrap" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>@AdministrationDataBase.Resources.Resource.Name</th>
+                        <th>@AdministrationDataBase.Resources.Resource.Email</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (User user in Model)
+                    {
+                        <tr id="item-@user.Id">
+                            <td>@Html.DisplayFor(modelItem => user.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => user.Email)</td>
+                            <td> <a href="@Url.Action("EditUser", "User", new { id = user.Id })"><i class="mdi mdi-pencil text-dark"></i></a></td>
+                            <td> <a name="rmvUser-@user.Id"  class="pointer"><i class="mdi mdi-delete text-danger"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+             $('#DataTable').DataTable({
+                 "displayLength": 5,
+                 "lengthChange": false,
+                 "columnDefs": [
+                     { "orderable": false, "targets": [2, 3] },
+                     { "orderable": true, "targets": [0, 1] }
+                 ],
+                 drawCallback: function () {
+                     $('.dataTables_paginate ul').addClass('pagination-modern');
+                 },
+                 language: {
+                     url: "@Url.Content("~/assets/lib/datatables.net/i18n/")@(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName).json",
+                     searchPlaceholder: 'Search',
+                 },
+             });
+        
+              $('a[name^="rmvUser-"]').click(function(e) {
+             e.preventDefault();
+
+              // Get the user ID from the item name
+             var userId = $(this).attr('name').replace('rmvUser-', '');
+
+              // Show confirmation with SweetAlert
+             Swal.fire({
+                 title: '@AdministrationDataBase.Resources.Resource.ConfirmDelete',
+                 text: '@AdministrationDataBase.Resources.Resource.ConfirmDeleteUser',
+                 icon: 'warning',
+                 showCancelButton: true,
+                 confirmButtonColor: '#d33',
+                 cancelButtonColor: '#3085d6',
+                 confirmButtonText: '@AdministrationDataBase.Resources.Resource.Delete',
+                 cancelButtonText: '@AdministrationDataBase.Resources.Resource.Cancel'
+             }).then((result) => {
+                 if (result.isConfirmed) {
+                      // Call the delete method via AJAX
+                     $.ajax({
+                         url: '@Url.Action("DeleteConfirmed", "User")',
+                         type: 'POST',
+                         data: { id: userId },
+                         headers: {
+                             'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                         },
+                         success: function(response) {
+                              // Delete the row from the table
+                             $('#item-' + userId).remove();
+
+                             Swal.fire(
+                                 '@AdministrationDataBase.Resources.Resource.Deleted',
+                                 '@AdministrationDataBase.Resources.Resource.UserDeleted',
+                                 'success'
+                             );
+                         },
+                         error: function(xhr) {
+                             Swal.fire(
+                                 '@AdministrationDataBase.Resources.Resource.Error',
+                                 '@AdministrationDataBase.Resources.Resource.DeleteError',
+                                 'error'
+                             );
+                         }
+                     });
+                 }
+             });
+         });
+
+       });
+    </script>
+}

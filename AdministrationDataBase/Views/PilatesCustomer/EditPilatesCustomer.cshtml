@@ -1,0 +1,247 @@
+﻿@model AdministrationDataBaseData.Models.PilatesCustomer
+
+@{
+    ViewData["Title"] = "Edit Pilates Customer";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Subheader
+{
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor fw-bold" style="color: #777777;">@AdministrationDataBase.Resources.Resource.EditPilatesCustomer</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-end">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb justify-content-end">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "PilatesCustomer")">@AdministrationDataBase.Resources.Resource.Start</a></li>
+                    <li class="breadcrumb-item active">@AdministrationDataBase.Resources.Resource.EditPilatesCustomer</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="row">
+                <!-- first colum -->
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="Name" class="fw-bold">Name</label>
+                        <input type="text" id="Name" name="Name" value="@Model.Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Surnames" class="fw-bold">Surnames</label>
+                        <input type="text" id="Surnames" name="Surnames" value="@Model.Surnames" class="form-control" />
+                        <span asp-validation-for="Surnames" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="DNI" class="fw-bold">DNI</label>
+                        <input type="text" id="DNI" name="DNI" value="@Model.DNI" class="form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Phone" class="fw-bold">Phone</label>
+                        <input type="text" id="Phone" name="Phone" value="@Model.Phone" class="form-control" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                </div>
+                <!-- Second column -->
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="Email" class="fw-bold">Email</label>
+                        <input type="email" id="Email" name="Email" value="@Model.Email" class="form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Address" class="fw-bold">Address</label>
+                        <input type="text" id="Address" name="Address" value="@Model.Address" class="form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="BirthDate" class="fw-bold">Birth Date</label>
+                        <input type="date"
+                               id="BirthDate"
+                               name="BirthDate"
+                               class="form-control"
+                               value="@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToString("yyyy-MM-dd") : "")" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="AccountNumber" class="fw-bold">Account Number</label>
+                        <input type="text" id="AccountNumber" name="AccountNumber" value="@Model.AccountNumber" class="form-control" />
+                        <span asp-validation-for="AccountNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <!-- Third column -->
+                <div class="col-md-4"> 
+                    <div class="form-group mb-3">
+                        <label for="IllnessInjuryPathology" class="form-check-label fw-bold">Do you have any type of ailment, injury, or pathology?</label>
+                        <div class="form-check">
+                            <input type="radio" id="IllnessInjuryPathologyYES" name="IllnessInjuryPathology" value="true"
+                            @(Model.IllnessInjuryPathology.HasValue && Model.IllnessInjuryPathology.Value ? "checked" : "")
+                                   class="form-check-input" />
+                            <label for="IllnessInjuryPathologyYES" class="form-check-label">YES</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="IllnessInjuryPathologyNO" name="IllnessInjuryPathology" value="false"
+                            @(Model.IllnessInjuryPathology.HasValue && !Model.IllnessInjuryPathology.Value ? "checked" : "")
+                                   class="form-check-input" />
+                            <label for="IllnessInjuryPathologyNO" class="form-check-label">NO</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="IllnessInjuryPathologyVOID" name="IllnessInjuryPathology" value=""
+                            @(Model.IllnessInjuryPathology == null ? "checked" : "")
+                                   class="form-check-input" />
+                            <label for="IllnessInjuryPathologyVOID" class="form-check-label">No selection</label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3" id="ObservationsAilment" hidden>
+                        <label for="DiseaseInjuryPathologyObservations" class="fw-bold">Observations on illness, injury, pathology</label>
+                        <textarea id="DiseaseInjuryPathologyObservations" name="DiseaseInjuryPathologyObservations" class="form-control">@Model.DiseaseInjuryPathologyObservations</textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="OtherObservations" class="fw-bold">Other Observations</label>
+                        <textarea id="OtherObservations" name="OtherObservations" class="form-control" rows="4">@Model.OtherObservations</textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- Objectives -->
+            <div class="form-group">
+                <h3 class="text-themecolor fw-bold">@AdministrationDataBase.Resources.Resource.Objectives</h3>
+                <div class="row">
+                    @if (ViewBag.Objectives != null)
+                    {
+                        @foreach (var objective in ViewBag.Objectives as List<AdministrationDataBaseData.Models.Objective>)
+                        {
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           value="@objective.Id"
+                                           id="objective_@objective.Id"
+                                           name="selectedObjectives[]" />
+                                    <label class="form-check-label fw-bold" for="objective_@objective.Id">
+                                        @objective.Name
+                                    </label>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No objectives found</p>
+                    }
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="@Url.Action("Index", "PilatesCustomer")" class="btn btn-info">
+                    @AdministrationDataBase.Resources.Resource.Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $.validator.addMethod("iban", function (value, element) {
+                var pattern = /^[A-Z]{2}\d{2}\d{20}$/;
+                return this.optional(element) || pattern.test(value);
+            }, "Please enter a valid account number (2 letters + 2 check digits + 20 account digits)");
+
+            $("form").validate({
+                rules: {
+                    Name: {
+                        required: true
+                    },
+                    Surnames: {
+                        required: true
+                    },
+                    Phone: {
+                        required: true,
+                        digits: true,
+                        minlength: 9,
+                        maxlength: 9
+                    },
+                    AccountNumber: {
+                        iban: true
+                    }
+                },
+                messages: {
+                    Name: {
+                        required: "The Name field is required"
+                    },
+                    Surnamess: {
+                        required: "The Surnames field is required"
+                    },
+                    Phone: {
+                        required: "The Phone field is required",
+                        digits: "Please enter numbers only",
+                        minlength: "The 'Phone' must have exactly 9 digits",
+                        maxlength: "The 'Phone' must have exactly 9 digits"
+                    },
+                    AccountNumber: {
+                        iban: "Please enter a valid account number (2 letters + 2 check digits + 20 account digits)"
+                    }
+                },
+                errorElement: "div",
+                errorClass: "text-danger",
+                highlight: function (element) {
+                    $(element).addClass("is-invalid");
+                },
+                unhighlight: function (element) {
+                    $(element).removeClass("is-invalid");
+                },
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element);
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const radios = document.querySelectorAll('input[name="IllnessInjuryPathology"]');
+            const observationsContainer = document.getElementById('ObservationsAilment');
+            const observationsTextarea = document.getElementById('DiseaseInjuryPathologyObservations');
+
+            // Function to show or hide the observations field
+            function toggleObservations() {
+                const selectedValue = document.querySelector('input[name="IllnessInjuryPathology"]:checked').value;
+
+                if (selectedValue === "true") {
+                    observationsContainer.hidden = false;
+                } else {
+                    observationsContainer.hidden = true;
+                    observationsTextarea.value = '';      // Clean content
+                }
+            }
+
+            // Set the initial state on page load
+            const selectedRadio = document.querySelector('input[name="IllnessInjuryPathology"]:checked');
+            if (selectedRadio && selectedRadio.value === "true") {
+                observationsContainer.hidden = false; // Show observations if "YES" is selected
+            } else {
+                observationsContainer.hidden = true;  // Hide if "NO" or "No selection" is selected
+                observationsTextarea.value = '';      // Clear observations if "YES" was not selected
+            }
+
+            // Add change event to radios
+            radios.forEach(radio => {
+                radio.addEventListener('change', toggleObservations);
+            });
+
+            // Run on page load to set the initial state
+            toggleObservations();
+        });
+    </script>
+
+}
+
+
+

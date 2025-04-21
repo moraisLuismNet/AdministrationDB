@@ -1,0 +1,26 @@
+﻿@using System.Security.Claims
+
+<aside class="left-sidebar">
+	<!-- Sidebar scroll-->
+	<div class="scroll-sidebar">
+		<!-- Sidebar navigation-->
+		<nav class="sidebar-nav">
+			<ul id="sidebarnav">
+				<li><a href="@Url.Action("Index", "MassagesCustomer")"><i class="mdi mdi-credit-card"></i> <span class="hide-menu"> @AdministrationDataBase.Resources.Resource.MassagesCustomers </span> </a></li>
+				<li><a href="@Url.Action("Index", "Pathology")"><i class="mdi mdi-checkbox-marked-outline"></i> <span class="hide-menu"> @AdministrationDataBase.Resources.Resource.Pathologies </span></a></li>
+				<li><a href="@Url.Action("Index", "PilatesCustomer")"><i class="mdi mdi-credit-card"></i> <span class="hide-menu"> @AdministrationDataBase.Resources.Resource.PilatesCustomers </span> </a></li>
+				<li><a href="@Url.Action("Index", "Objective")"><i class="mdi mdi-checkbox-marked-outline"></i> <span class="hide-menu"> @AdministrationDataBase.Resources.Resource.Objectives </span></a></li>
+				@if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Email)?.Value == ViewBag.AdminEmail)
+				{
+					<li>
+						<a href="@Url.Action("Index", "User")">
+							<i class="mdi mdi-account"></i>
+							<span class="hide-menu"> @AdministrationDataBase.Resources.Resource.Users </span>
+						</a>
+					</li>
+				}
+			</ul>
+		</nav>
+	</div>
+</aside>
+

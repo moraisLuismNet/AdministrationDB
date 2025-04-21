@@ -1,0 +1,36 @@
+﻿@model AdministrationDataBaseData.Models.Session
+
+@{
+    ViewData["Title"] = "Delete Session";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Subheader
+{
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor fw-bold" style="color: #777777;">@AdministrationDataBase.Resources.Resource.DeleteSession</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-end">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb justify-content-end">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Session")">@AdministrationDataBase.Resources.Resource.Start</a></li>
+                    <li class="breadcrumb-item active">@AdministrationDataBase.Resources.Resource.DeleteSession</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <p>Are you sure you want to delete the session with date and time: <span class="fw-bold">@Model.SessionDate.ToString("dd/MM/yyyy HH:mm")</span>?</p>
+
+    <form asp-action="DeleteSessionConfirmed" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="@Url.Action("DetailsPilatesCustomer", "PilatesCustomer", new { id = Model.PilatesCustomerId })" class="btn btn-primary">Cancel</a>
+    </form>
+</div>

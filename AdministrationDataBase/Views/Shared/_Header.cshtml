@@ -1,0 +1,78 @@
+﻿@using System.Security.Claims
+
+<header class="topbar">
+    <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">
+                <b id="logo-block" style="display: none">
+                </b>
+                <span>
+                    <!-- dark Logo text -->
+                    <img src="~/assets/images/AdministrationBD.png" style="height: 2cm" alt="homepage" class="dark-logo" />
+                    <!-- Light Logo text -->
+                    <img src="~/assets/images/AdministrationBD.png" style="height: 2cm" class="light-logo" alt="homepage" />
+                </span>
+            </a>
+        </div>
+        <div class="navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark" href="javascript:void(0)">
+                        <i class="ti-menu"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)" onclick="toggleLogoVisibility()">
+                        <i class="icon-menu" style="color: black;"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav" style="margin-left: auto; margin-right: 20px;">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="btn btn-outline-dark" href="@Url.Action("Logout", "Account")"
+                           style="border-width: 2px; font-weight: bold;">
+                            Cerrar sesión (@User.FindFirst(ClaimTypes.Email)?.Value)
+                        </a>
+                    </li>
+                }
+            </ul>
+
+        </div>
+    </nav>
+</header>
+
+<script>
+    // Función para alternar la visibilidad del logo de icono
+    function toggleLogoVisibility() {
+        var logoBlock = document.getElementById("logo-block");
+        var logoSvg = document.getElementById("logo-svg");
+
+        if (logoBlock.style.display === "none") {
+            logoBlock.style.display = "block";
+            logoSvg.style.display = "none"; 
+        } else {
+            logoBlock.style.display = "none";
+            logoSvg.style.display = "block"; 
+        }
+    }
+
+    window.addEventListener('resize', function () {
+        var logoBlock = document.getElementById("logo-block");
+        var logoSvg = document.getElementById("logo-svg");
+
+        if (window.innerWidth >= 1146) { 
+            logoBlock.style.display = "none";
+            logoSvg.style.display = "block"; 
+        } else {
+            if (logoBlock.style.display === "none") {
+                logoBlock.style.display = "block"; 
+                logoSvg.style.display = "none"; 
+            }
+        }
+    });
+
+    // Ejecuta el ajuste inicial al cargar la página
+    window.dispatchEvent(new Event('resize'));
+</script>

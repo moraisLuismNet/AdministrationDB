@@ -1,0 +1,38 @@
+﻿@model AdministrationDataBaseData.Models.Massage
+
+@{
+    ViewData["Title"] = "Delete Massage";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Subheader
+{
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor fw-bold" style="color: #777777;">@AdministrationDataBase.Resources.Resource.DeleteMassage</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-end">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb justify-content-end">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Massage")">@AdministrationDataBase.Resources.Resource.Start</a></li>
+                    <li class="breadcrumb-item active">@AdministrationDataBase.Resources.Resource.DeleteMassage</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <p>Are you sure you want to delete the massage with date and time?: <span class="fw-bold">@Model.MassageDate.ToString("dd/MM/yyyy HH:mm")</span>?</p>
+    <form asp-action="DeleteMassage" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="IdMassagesCustomer" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="@Url.Action("DetailsMassagesCustomer", "MassagesCustomer", new { id = Model.IdMassagesCustomer })" class="btn btn-primary">Cancel</a>
+    </form>
+</div>
+

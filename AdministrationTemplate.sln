@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrationDataBase", "AdministrationDataBase\AdministrationDataBase.csproj", "{23EA63AF-0259-2C0E-1C10-35FF40192F50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrationDataBaseData", "AdministrationDataBaseData\AdministrationDataBaseData.csproj", "{624AAF32-6E0A-B9A2-7798-C99102288E90}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23EA63AF-0259-2C0E-1C10-35FF40192F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23EA63AF-0259-2C0E-1C10-35FF40192F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23EA63AF-0259-2C0E-1C10-35FF40192F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23EA63AF-0259-2C0E-1C10-35FF40192F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{624AAF32-6E0A-B9A2-7798-C99102288E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624AAF32-6E0A-B9A2-7798-C99102288E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624AAF32-6E0A-B9A2-7798-C99102288E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624AAF32-6E0A-B9A2-7798-C99102288E90}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD76DD69-26A2-4088-906F-59B9C315EBF7}
+	EndGlobalSection
+EndGlobal

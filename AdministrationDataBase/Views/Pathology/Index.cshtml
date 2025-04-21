@@ -1,0 +1,83 @@
+﻿@model IEnumerable<AdministrationDataBaseData.Models.Pathology>
+@{
+    ViewData["Title"] = "Patologies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Subheader
+{
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor fw-bold" style="color: #777777;">@AdministrationDataBase.Resources.Resource.Pathologies</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-end">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb justify-content-end">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Pathology")">@AdministrationDataBase.Resources.Resource.Start</a></li>
+                    <li class="breadcrumb-item active">@AdministrationDataBase.Resources.Resource.Pathologies</li>
+                </ol>
+                <a href="@Url.Action("CreatePathology", "Pathology")" class="btn btn-primary d-none d-lg-block m-l-15">
+                    <i class="fa fa-plus-circle"></i> @AdministrationDataBase.Resources.Resource.NewPathology
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="card d-flex justify-content-center align-items-center">
+    <div class="card-body">
+        <table class="table mt-3" id="DataTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    @foreach (var pathology in Model)
+                    {
+                        <tr>
+                            <td class="text-truncate" style="max-width: 200px;">@pathology.Name</td>
+                            <td class="text-end">
+                                <a href="@Url.Action("EditPathology", "Pathology", new { id = pathology.Id })" class="btn btn-info">Edit</a>
+                                <a href="@Url.Action("DeletePathology", "Pathology", new { id = pathology.Id })" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="2" class="text-center">No pathologies found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        $(document).ready(function () {
+            $('#DataTable').DataTable({
+                "displayLength": 5,
+                "lengthChange": false,
+                "columnDefs": [
+                    { "orderable": false, "targets": [1] },
+                    { "orderable": true, "targets": [0] }
+                ],
+                drawCallback: function () {
+                    $('.dataTables_paginate ul').addClass('pagination-modern');
+                },
+                language: {
+                    url: "@Url.Content("~/assets/lib/datatables.net/i18n/")@(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName).json",
+                    searchPlaceholder: 'Search'
+                }
+            });
+        });
+    </script>
+}
+

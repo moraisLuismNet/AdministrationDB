@@ -1,0 +1,76 @@
+﻿@model AdministrationDataBaseData.Models.Pathology
+@{
+    ViewData["Title"] = "Pathologies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Subheader
+{
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor fw-bold" style="color: #777777;">@AdministrationDataBase.Resources.Resource.EditPathology</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-end">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb justify-content-end">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Pathology")">@AdministrationDataBase.Resources.Resource.Start</a></li>
+                    <li class="breadcrumb-item active">@AdministrationDataBase.Resources.Resource.EditPathology</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="Name" class="fw-bold">Name</label>
+                        <input type="text" id="Name" name="Name" value="@Model.Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" class="btn btn-primary">@AdministrationDataBase.Resources.Resource.Save</button>
+                        <a href="@Url.Action("Index", "Pathology", new { id = Model.Id })" class="btn btn-info">
+                            @AdministrationDataBase.Resources.Resource.Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("form").validate({
+                rules: {
+                    Name: {
+                        required: true
+                    }
+                },
+                messages: {
+                    Name: {
+                        required: "The Name field of the pathology is required
+                    }
+                },
+                errorElement: "div",
+                errorClass: "text-danger",
+                highlight: function (element) {
+                    $(element).addClass("is-invalid");
+                },
+                unhighlight: function (element) {
+                    $(element).removeClass("is-invalid");
+                },
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element);
+                }
+            });
+        });
+    </script>
+}

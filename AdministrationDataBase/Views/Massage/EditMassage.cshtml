@@ -1,0 +1,91 @@
+﻿@model AdministrationDataBaseData.Models.Massage
+
+@{
+    ViewData["Title"] = "Edit Massage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Subheader
+{
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor fw-bold" style="color: #777777;">@AdministrationDataBase.Resources.Resource.EditMassage</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-end">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb justify-content-end">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "MassageCustomer")">@AdministrationDataBase.Resources.Resource.Start</a></li>
+                    <li class="breadcrumb-item active">@AdministrationDataBase.Resources.Resource.EditMassage</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="EditMassage" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="IdMassagesCustomer" />
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group mb-3" ">
+                        <label asp-for="MassageDate" class="fw-bold">Date and time of the massage</label>
+                        <input type="datetime-local" name="MassageDate" class="form-control" value="@Model.MassageDate.ToString("yyyy-MM-ddTHH:mm")" />
+                    </div>
+                    <div class="form-group mb-3" ">
+                        <label asp-for="OtherObservations" class="fw-bold">Massage Observations</label>
+                        <textarea asp-for="OtherObservations" name="OtherObservations" id="OtherObservations" class="form-control">@Model.OtherObservations</textarea>
+                        <span asp-validation-for="OtherObservations" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3" ">
+                        <button type="submit" class="btn btn-primary">@AdministrationDataBase.Resources.Resource.Save</button>
+                        <a href="@Url.Action("DetailsMassagesCustomer", "MassagesCustomer", new { id = Model.IdMassagesCustomer })" class="btn btn-info">@AdministrationDataBase.Resources.Resource.Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("form").validate({
+                rules: {
+                    OtherObservations: {
+                        required: true
+                    }
+                },
+                messages: {
+                    OtherObservations: {
+                        required: "The Observations field is required"
+                    }
+                },
+                errorElement: "div",
+                errorClass: "text-danger",
+                highlight: function (element) {
+                    $(element).addClass("is-invalid");
+                },
+                unhighlight: function (element) {
+                    $(element).removeClass("is-invalid");
+                },
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element);
+                }
+            });
+        });
+    </script>
+}
+
+
+   
+    
+
+    
+
+    
+
+    
+

@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActivateAccountErrorDoesntExist" xml:space="preserve">
+    <value>There is no user associated with this validation</value>
+  </data>
+  <data name="ActivateAccountErrorTimeLimitExceeded" xml:space="preserve">
+    <value>The validation time has exceeded the limit</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>You're going to delete this user. Are you sure?</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Passwords Do Not Match</value>
+  </data>
+  <data name="UserEdit" xml:space="preserve">
+    <value>User Edit</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="ErrorDeleteUser" xml:space="preserve">
+    <value>The user could not be deleted</value>
+  </data>
+  <data name="ErrorCreateUser" xml:space="preserve">
+    <value>The user could not be created</value>
+  </data>
+  <data name="ErrorEditUser" xml:space="preserve">
+    <value>The user could not be edited</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="EnterNewPassword" xml:space="preserve">
+    <value>Enter a new password</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NewUser" xml:space="preserve">
+    <value>New User</value>
+  </data>
+  <data name="ForgottenPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="RepeatPassword" xml:space="preserve">
+    <value>Repeat Password</value>
+  </data>
+  <data name="DeletedUser" xml:space="preserve">
+    <value>The user has been successfully deleted</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>The user could not be found</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Customers" xml:space="preserve">
+    <value>Customers</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="CustomerCreate" xml:space="preserve">
+    <value>Customer Create</value>
+  </data>
+  <data name="Pathologies" xml:space="preserve">
+    <value>Pathologies</value>
+  </data>
+  <data name="NewCustomer" xml:space="preserve">
+    <value>New Customer</value>
+  </data>
+  <data name="CustomerData" xml:space="preserve">
+    <value>Customer Data</value>
+  </data>
+  <data name="NewPathology" xml:space="preserve">
+    <value>New Pathology</value>
+  </data>
+  <data name="OtherData" xml:space="preserve">
+    <value>Other Data</value>
+  </data>
+  <data name="Massages" xml:space="preserve">
+    <value>Massages</value>
+  </data>
+  <data name="NewMassage" xml:space="preserve">
+    <value>New Massgae</value>
+  </data>
+  <data name="MassageEdit" xml:space="preserve">
+    <value>Massage Edit</value>
+  </data>
+  <data name="MassageDelete" xml:space="preserve">
+    <value>Massage Delete</value>
+  </data>
+  <data name="PathologyEdit" xml:space="preserve">
+    <value>Pathology Edit</value>
+  </data>
+  <data name="PathologyDelete" xml:space="preserve">
+    <value>Pathology Delete</value>
+  </data>
+  <data name="CustomerDelete" xml:space="preserve">
+    <value>Customer Delete</value>
+  </data>
+  <data name="CustomerEdit" xml:space="preserve">
+    <value>Customer Edit</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>Required Field</value>
+  </data>
+  <data name="EmailFormatNotValid" xml:space="preserve">
+    <value>Invalid email format</value>
+  </data>
+  <data name="UserDeleted" xml:space="preserve">
+    <value>User Deleted</value>
+  </data>
+  <data name="StartSession" xml:space="preserve">
+    <value>Start Session</value>
+  </data>
+  <data name="RecoverPassword" xml:space="preserve">
+    <value>Recover Password</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+  <data name="EditCustomer" xml:space="preserve">
+    <value>Edit Customer</value>
+  </data>
+  <data name="DeleteEpisode" xml:space="preserve">
+    <value>Delete Episode</value>
+  </data>
+  <data name="DeletePathology" xml:space="preserve">
+    <value>Delete Pathology</value>
+  </data>
+  <data name="EditPathology" xml:space="preserve">
+    <value>Edit Pathology</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="EmailNoRepeat" xml:space="preserve">
+    <value>Email No Repeat</value>
+  </data>
+  <data name="FieldRequired" xml:space="preserve">
+    <value>Field Required</value>
+  </data>
+  <data name="InvalidEmailFormat" xml:space="preserve">
+    <value>Invalid Email Format</value>
+  </data>
+  <data name="PasswordRepeat" xml:space="preserve">
+    <value>Password Repeat</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>Edit User</value>
+  </data>
+  <data name="MassagesCustomers" xml:space="preserve">
+    <value>Massages Customers</value>
+  </data>
+  <data name="NewMassagesCustomer" xml:space="preserve">
+    <value>New Massages Customer</value>
+  </data>
+  <data name="MassagesCustomerData" xml:space="preserve">
+    <value>Massages Customer Data</value>
+  </data>
+  <data name="EditMassagesCustomer" xml:space="preserve">
+    <value>Edit Massages Customer</value>
+  </data>
+  <data name="EditMassage" xml:space="preserve">
+    <value>Edit Massage</value>
+  </data>
+  <data name="DeleteMassage" xml:space="preserve">
+    <value>Delete Massage</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="PasswordLeaveBlank" xml:space="preserve">
+    <value>Password Leave Blank</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>Update Failed</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Confirm Delete</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="DeleteError" xml:space="preserve">
+    <value>DeleteError</value>
+  </data>
+  <data name="ConfirmDeleteUser" xml:space="preserve">
+    <value>Confirm Delete User</value>
+  </data>
+  <data name="Surnames" xml:space="preserve">
+    <value>Surnames</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="DeleteMassagesCustomer" xml:space="preserve">
+    <value>Delete Massages Customer</value>
+  </data>
+  <data name="NewPilatesCustomer" xml:space="preserve">
+    <value>New Pilates Customer</value>
+  </data>
+  <data name="DeletePilatesCustomer" xml:space="preserve">
+    <value>Delete Pilates Customer</value>
+  </data>
+  <data name="NewSession" xml:space="preserve">
+    <value>New Session</value>
+  </data>
+  <data name="Objectives" xml:space="preserve">
+    <value>Objectives</value>
+  </data>
+  <data name="Sessions" xml:space="preserve">
+    <value>Sessions</value>
+  </data>
+  <data name="EditPilatesCustomer" xml:space="preserve">
+    <value>Edit Pilates Customer</value>
+  </data>
+  <data name="NewObjective" xml:space="preserve">
+    <value>New Objective</value>
+  </data>
+  <data name="DeleteObjective" xml:space="preserve">
+    <value>Delete Objective</value>
+  </data>
+  <data name="EditObjective" xml:space="preserve">
+    <value>Edit Objective</value>
+  </data>
+  <data name="CreateSession" xml:space="preserve">
+    <value>Create Session</value>
+  </data>
+  <data name="DeleteSession" xml:space="preserve">
+    <value>Delete Session</value>
+  </data>
+  <data name="EditSession" xml:space="preserve">
+    <value>Edit Session</value>
+  </data>
+  <data name="PilatesCustomers" xml:space="preserve">
+    <value>Pilates Customers</value>
+  </data>
+  <data name="DetailsMassagesCustomer" xml:space="preserve">
+    <value>Details Massages Customer</value>
+  </data>
+  <data name="DetailsPilatesCustomer" xml:space="preserve">
+    <value>Details Pilates Customer</value>
+  </data>
+</root>

@@ -1,0 +1,225 @@
+﻿@model AdministrationDataBaseData.Models.MassagesCustomer
+
+@{
+    ViewData["Title"] = "Create MassagesCustomer";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Subheader
+{
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor fw-bold" style="color: #777777;">@AdministrationDataBase.Resources.Resource.NewMassagesCustomer</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-end">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb justify-content-end">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "MassagesCustomer")">@AdministrationDataBase.Resources.Resource.Start</a></li>
+                    <li class="breadcrumb-item active">@AdministrationDataBase.Resources.Resource.NewMassagesCustomer</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="CreateMassagesCustomer" method="post">
+            <div class="row">
+                <!-- First column -->
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="Name" class="fw-bold">Name</label>
+                        <input type="text" id="Name" name="Name" value="@Model.Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Surnames" class="fw-bold">Surnames</label>
+                        <input type="text" id="Surnames" name="Surnames" value="@Model.Surnames" class="form-control" />
+                        <span asp-validation-for="Surnames" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="DNI" class="fw-bold">DNI</label>
+                        <input type="text" id="DNI" name="DNI" value="@Model.DNI" class="form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Phone" class="fw-bold">Phone</label>
+                        <input type="text" id="Phone" name="Phone" value="@Model.Phone" class="form-control" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="AccountNumber" class="fw-bold">Account Number</label>
+                        <input type="text" id="AccountNumber" name="AccountNumber" value="@Model.AccountNumber" class="form-control" />
+                        <span asp-validation-for="AccountNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Address" class="fw-bold">Address</label>
+                        <input type="text" id="Address" name="address" value="@Model.Address" class="form-control" />
+                    </div>
+                </div>
+                <!-- Second column -->
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="BirthDate" class="fw-bold">Birth Date</label>
+                        <input type="date"
+                               id="BirthDate"
+                               name="BirthDate"
+                               class="form-control"
+                               value="@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToString("dd-MM-yyyy") : "")" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Email" class="fw-bold">Email</label>
+                        <input type="email" id="Email" name="Email" value="@Model.Email" class="form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="From" class="fw-bold">From</label>
+                        <input type="text" id="From" name="From" value="@Model.From" class="form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Work" class="fw-bold">Work</label>
+                        <input type="text" id="Work" name="Work" value="@Model.Work" class="form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="PhysicalActivity" class="fw-bold">Physical Activity</label>
+                        <input type="text" id="PhysicalActivity" name="PhysicalActivity" value="@Model.PhysicalActivity" class="form-control" />
+                    </div>
+                </div>
+                <!-- Third column -->
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="Pregnancies" class="fw-bold">Pregnancies</label>
+                        <input type="text" id="Pregnancies" name="Pregnancies" value="@Model.Pregnancies" class="form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Operations" class="fw-bold">Operations</label>
+                        <input type="text" id="Operations" name="Operations" value="@Model.Operations" class="form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="otherObservations" class="fw-bold">Other Observations</label>
+                        <textarea id="OtherObservations" name="OtherObservations" class="form-control" rows="8">@Model.OtherObservations</textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="ReasonForVisit" class="fw-bold">Reason For Visit</label>
+                        <input type="text" id="ReasonForVisit" name="ReasonForVisit" value="@Model.ReasonForVisit" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pathologies -->
+            <div class="form-group">
+                <h3 class="text-themecolor fw-bold">@AdministrationDataBase.Resources.Resource.Pathologies</h3>
+                <div class="row">
+                    @if (ViewBag.Pathologies != null)  
+                    {       
+                        @foreach (var pathology in ViewBag.Pathologies as List<AdministrationDataBaseData.Models.Pathology>)
+                        {
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                        type="checkbox"
+                                        value="@pathology.Id"
+                                        id="pathology_@pathology.Id"
+                                        name="selectedPathologies" />
+                                    <label class="form-check-label fw-bold" for="pathology_@pathology.Id">
+                                        @pathology.Name
+                                    </label>
+                                    <!-- Associated description field -->
+                                    <input type="text"
+                                        class="form-control mt-2 descripcion-pathology"
+                                        id="description_@pathology.Id"
+                                        name="descriptions[@pathology.Id]"
+                                        placeholder="Enter an observation for this pathology"
+                                        style="display: none;" />
+                                </div>
+                            </div>
+                        }
+                    }
+                 </div>
+            </div>
+            <div class="text-center">
+                <div class="me-3">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="@Url.Action("Index", "MassagesCustomer")" class="btn btn-info">
+                        @AdministrationDataBase.Resources.Resource.Cancel
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $.validator.addMethod("iban", function(value, element) {
+                var pattern = /^[A-Z]{2}\d{2}\d{20}$/;
+                return this.optional(element) || pattern.test(value);
+            }, "Please enter a valid account number (2 letters + 2 check digits + 20 account digits))");
+
+            $("form").validate({
+                rules: {
+                    Name: {
+                        required: true
+                    },
+                    Surnames: {
+                        required: true
+                    },
+                    Phone: {
+                        required: true,
+                        digits: true,
+                        minlength: 9,
+                        maxlength: 9
+                 },
+                    AccountNumber: {
+                        iban: true 
+                    }
+                },
+                messages: {
+                    Name: {
+                        required: "The Name field is required"
+                    },
+                    Surnames: {
+                        required: "The Surnames filed is required"
+                    },
+                    Phone: {
+                        required: "The Phone field is required",
+                        digits: "Please enter numbers only.",
+                        minlength: "The 'Phone' must have exactly 9 digits",
+                        maxlength: "The 'Phone' must have exactly 9 digits."
+                    },
+                    AccountNumber: {
+                        iban: "Please enter a valid account number (2 letters + 2 check digits + 20 account digits)"
+                    }
+                },
+                errorElement: "div",
+                errorClass: "text-danger",
+                highlight: function (element) {
+                    $(element).addClass("is-invalid");
+                },
+                unhighlight: function (element) {
+                    $(element).removeClass("is-invalid");
+                },
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element);
+                }
+            });
+            // Assign the event to the pathology checkboxes
+            $('input[name="selectedPathologies"]').change(function () {
+                var pathologyId = $(this).val();
+                var descriptionInput = $('#description_' + pathologyId);
+                if (this.checked) {
+                    descriptionInput.show();
+                } else {
+                    descriptionInput.hide();
+                    descriptionInput.val('');
+                }
+            });
+
+        });
+    </script>
+}
+
+

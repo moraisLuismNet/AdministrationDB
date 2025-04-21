@@ -1,0 +1,241 @@
+﻿@model AdministrationDataBaseData.Models.MassagesCustomer
+@using System.Security.Claims
+
+@{
+	ViewData["Title"] = "Massages Customer Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	bool isAdmin = User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Email)?.Value == ViewBag.AdminEmail;
+}
+
+@section Subheader
+{
+	<div class="row page-titles">
+		<div class="col-md-5 align-self-center">
+			<h4 class="text-themecolor fw-bold" style="color: #777777;">@AdministrationDataBase.Resources.Resource.DetailsMassagesCustomer</h4>
+		</div>
+		<div class="col-md-7 align-self-center text-end">
+			<div class="d-flex justify-content-end align-items-center">
+				<ol class="breadcrumb justify-content-end">
+					<li class="breadcrumb-item"><a href="@Url.Action("Index", "MassagesCustomer")">@AdministrationDataBase.Resources.Resource.Start</a></li>
+					<li class="breadcrumb-item active">@AdministrationDataBase.Resources.Resource.DetailsMassagesCustomer</li>
+				</ol>
+				<a href="@Url.Action("CreateMassage", "Massage", new { massagesCustomerId = Model.Id })" class="btn btn-primary d-none d-lg-block m-l-15">
+					<i class="fa fa-plus-circle"></i> @AdministrationDataBase.Resources.Resource.NewMassage
+				</a>
+			</div>
+		</div>
+	</div>
+}
+
+@{
+	int pathologyCount = ViewBag.Pathologies?.Count ?? 0;
+
+	int otherDataCount = (!string.IsNullOrEmpty(Model.Work) ||
+								!string.IsNullOrEmpty(Model.PhysicalActivity) ||
+								!string.IsNullOrEmpty(Model.Pregnancies) ||
+								!string.IsNullOrEmpty(Model.Operations) ||
+								!string.IsNullOrEmpty(Model.ReasonForVisit) ||
+								!string.IsNullOrEmpty(Model.OtherObservations)) ? 1 : 0;
+	
+	string colClass = (pathologyCount > 0 && otherDataCount > 0) ? "col-md-4" :
+						(pathologyCount > 0 || otherDataCount > 0) ? "col-md-6" :
+						"col-md-12";
+
+}
+
+<div class="container">
+	<div class="row">
+		<!-- Customer Data -->
+		<div class="@colClass">
+			<div class="card mb-3">
+				<div class="card-body">
+					<h5 class="card-title" style="text-decoration: underline;">@AdministrationDataBase.Resources.Resource.MassagesCustomerData</h5>
+					<div class="mb-3"><span class="fw-bold">Name:</span> @Model.Name</div>
+					<div class="mb-3"><span class="fw-bold">Surnames:</span> @Model.Surnames</div>
+					@if (isAdmin)
+					{
+						@if (!string.IsNullOrEmpty(Model.DNI))
+					{
+						<div class="mb-3">
+							<span class="fw-bold">DNI:</span> @Model.DNI
+						</div>
+					}
+					}
+					<div class="mb-3"><span class="fw-bold">Phone:</span> @Model.Phone</div>
+					@if (isAdmin)
+					{
+						@if (!string.IsNullOrEmpty(Model.AccountNumber))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Account Number:</span> @Model.AccountNumber
+							</div>
+						}
+						@if (!string.IsNullOrEmpty(Model.Address))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Address:</span> @Model.Address
+							</div>
+						}
+						@if (Model.BirthDate.HasValue)
+						{
+							<div class="mb-3">
+								<span class="fw-bold">BirthDate:</span> @Model.BirthDate.Value.ToString("dd-MM-yyyy")
+							</div>
+						}
+					}
+					@if (!string.IsNullOrEmpty(Model.Email))
+					{
+						<div class="mb-3">
+							<span class="fw-bold">Email:</span> <a href="mailto:@Model.Email">@Model.Email</a>
+						</div>
+					}
+					@if (!string.IsNullOrEmpty(Model.From))
+					{
+						<div class="mb-3">
+							<span class="fw-bold">From:</span> @Model.From
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+		<!-- Other Data -->
+		@if (!string.IsNullOrEmpty(Model.Work) || !string.IsNullOrEmpty(Model.PhysicalActivity) || !string.IsNullOrEmpty(Model.Pregnancies) || !string.IsNullOrEmpty(Model.Operations) || !string.IsNullOrEmpty(Model.ReasonForVisit) || !string.IsNullOrEmpty(Model.OtherObservations))
+		{
+			<div class="@colClass">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title" style="text-decoration: underline;">@AdministrationDataBase.Resources.Resource.OtherData</h5>
+						@if (!string.IsNullOrEmpty(Model.Work))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Work:</span> @Model.Work
+							</div>
+						}
+						@if (!string.IsNullOrEmpty(Model.PhysicalActivity))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">PhysicalActivity:</span> @Model.PhysicalActivity
+							</div>
+						}
+						@if (!string.IsNullOrEmpty(Model.Pregnancies))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Pregnancies:</span> @Model.Pregnancies
+							</div>
+						}
+						@if (!string.IsNullOrEmpty(Model.Operations))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Operations:</span> @Model.Operations
+							</div>
+						}
+						@if (!string.IsNullOrEmpty(Model.OtherObservations))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Other Observations:</span> @Model.OtherObservations
+							</div>
+						}
+						@if (!string.IsNullOrEmpty(Model.ReasonForVisit))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Reason For Visit:</span> @Model.ReasonForVisit
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+		}
+		<!-- Pathologies -->
+		@if (ViewBag.Pathologies != null && ViewBag.Pathologies.Count > 0)
+		{
+			<div class="@colClass">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title" style="text-decoration: underline;">@AdministrationDataBase.Resources.Resource.Pathologies</h5>
+						@foreach (var pathology in ViewBag.Pathologies)
+						{
+							var description = ViewBag.Observations.ContainsKey(pathology.Id) ? ViewBag.Observations[pathology.Id] : "There is no description";
+							<div class="mb-3">
+								<span class="fw-bold">@pathology.Name:</span> @description
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+	@if (TempData["Message"] != null)
+	{
+		var messageType = TempData["MessageType"]?.ToString();
+		<div class="alert @(messageType == "error" ? "alert-danger" : "alert-success")">
+			@TempData["Message"]
+		</div>
+	}
+	<!-- Massages -->
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title fw-bold">@AdministrationDataBase.Resources.Resource.Massages</h5>
+					@if (Model.Massages != null && Model.Massages.Any())
+					{
+						<div class="table-responsive">
+							<table class="table mt-3" id="DataTable">
+								<thead>
+									<tr>
+										<th style="width: 20%;">Date And Time</th>
+										<th style="width: 40%;">Observations</th>
+										<th style="width: 40%;"></th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var massage in Model.Massages)
+									{
+										<tr>
+											<td>@massage.MassageDate.ToString("dd-MM-yyyy HH:mm")</td>
+											<td>@massage.OtherObservations</td>
+											<td class="text-end">
+												<a href="@Url.Action("NotifyMassage", "MassagesCustomer", new { massagesCustomerId = Model.Id, massageId = massage.Id })"
+												   class="btn btn-success @(massage.MassageDate < DateTime.Now || massage.NotificationSent ? "disabled" : "")">
+													@(massage.MassageDate < DateTime.Now || massage.NotificationSent ? "Notified" : "Notify")
+												</a>
+												<a href="@Url.Action("EditMassage", "Massage", new { id = massage.Id })" class="btn btn-info">Edit</a>
+												<a href="@Url.Action("DeleteMassage", "Massage", new { id = massage.Id })" class="btn btn-danger">Delete</a>
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					}
+					else
+					{
+						<p>No massages available</p>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+			$('#DataTable').DataTable({
+				"displayLength": 5,
+				"lengthChange": false,
+				"columnDefs": [
+					{ "orderable": true, "targets": [0, 1] },
+					{ "orderable": false, "targets": [2] }
+				],
+				drawCallback: function () {
+					$('.dataTables_paginate ul').addClass('pagination-modern');
+				},
+				language: {
+					url: "@Url.Content("~/assets/lib/datatables.net/i18n/")@(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName).json",
+					searchPlaceholder: 'Search',
+				},
+			});
+		});
+	</script>
+}

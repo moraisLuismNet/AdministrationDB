@@ -1,0 +1,64 @@
+﻿@using AdministrationDataBaseData.Models
+@model User
+
+@{
+    ViewData["Title"] = AdministrationDataBase.Resources.Resource.StartSession;
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
+    <div class="login-box card">
+        <div class="card-body">
+            <form class="form-horizontal form-material" id="loginform" action="@Url.Action("Login", "Account")" method="post">
+                <h3 class="text-center m-b-20">@AdministrationDataBase.Resources.Resource.StartSession</h3>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="email" id="Email" name="Email" required placeholder="@AdministrationDataBase.Resources.Resource.Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="password" id="Password" name="Password" required placeholder="@AdministrationDataBase.Resources.Resource.Password">
+                    </div>
+                    <div class="ms-auto mt-1">
+                        <a href="javascript:void(0)" id="to-recover" class="text-muted"><i class="fas fa-lock m-r-5"></i> @AdministrationDataBase.Resources.Resource.ForgottenPassword</a>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="d-flex no-block align-items-center">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="customCheck1">
+                                <label class="form-check-label" for="customCheck1">@AdministrationDataBase.Resources.Resource.RememberMe</label>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <div class="col-xs-12 p-b-20">
+                        <button class="btn w-100 btn-lg btn-info btn-rounded text-white" type="submit">@AdministrationDataBase.Resources.Resource.StartSession</button>
+                    </div>
+                </div>
+            </form>
+            <form class="form-horizontal" id="recoverform" action="@Url.Action("ForgotPassword", "Account")">
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <h3>@AdministrationDataBase.Resources.Resource.RecoverPassword</h3>
+                        <p class="text-muted">Introduce tu email para enviar un correo de recuperación</p>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" id="emailRecover" name="emailRecover" type="email" required="" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button class="btn btn-primary btn-lg w-100 text-uppercase waves-effect waves-light" type="submit">@AdministrationDataBase.Resources.Resource.Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

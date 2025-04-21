@@ -1,0 +1,234 @@
+﻿@model AdministrationDataBaseData.Models.PilatesCustomer
+@using System.Security.Claims
+@{
+	ViewData["Title"] = "Dtails Pilates Customer";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	bool isAdmin = User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Email)?.Value == ViewBag.AdminEmail;
+}
+
+@section Subheader
+{
+	<div class="row page-titles">
+		<div class="col-md-5 align-self-center">
+			<h4 class="text-themecolor fw-bold" style="color: #777777;">@AdministrationDataBase.Resources.Resource.DetailsPilatesCustomer</h4>
+		</div>
+		<div class="col-md-7 align-self-center text-end">
+			<div class="d-flex justify-content-end align-items-center">
+				<ol class="breadcrumb justify-content-end">
+					<li class="breadcrumb-item"><a href="@Url.Action("Index", "PilatesCustomer")">@AdministrationDataBase.Resources.Resource.Start</a></li>
+					<li class="breadcrumb-item active">@AdministrationDataBase.Resources.Resource.DetailsPilatesCustomer</li>
+				</ol>
+				<a href="@Url.Action("CreateSession", "Session", new { pilatesCustomerId = Model.Id })" class="btn btn-primary d-none d-lg-block m-l-15">
+					<i class="fa fa-plus-circle"></i> @AdministrationDataBase.Resources.Resource.NewSession
+				</a>
+			</div>
+		</div>
+	</div>
+}
+
+@{
+	// Calculate the number of sections to display
+	int sectionsCount = 1; // We always show Customer Data
+	bool showOtherData = Model.IllnessInjuryPathology.HasValue || !string.IsNullOrEmpty(Model.OtherObservations);
+	bool showObjectives = ViewBag.Objectives != null && ViewBag.Objectives.Count > 0;
+
+	if (showOtherData) sectionsCount++;
+	if (showObjectives) sectionsCount++;
+
+	// Determine the width of the columns
+	string colClass = sectionsCount switch
+	{
+		1 => "col-md-12",
+		2 => "col-md-6",
+		3 => "col-md-4",
+		_ => "col-md-12"
+	};
+}
+
+<div class="container">
+	<div class="row">
+		<!-- Customer Data - -->
+		<div class="@colClass">
+			<div class="card mb-3">
+				<div class="card-body">
+					<h5 class="card-title" style="text-decoration: underline;">@AdministrationDataBase.Resources.Resource.CustomerData</h5>
+					<div class="mb-3"><span class="fw-bold">Name:</span> @Model.Name</div>
+					<div class="mb-3"><span class="fw-bold">Surnames:</span> @Model.Surnames</div>
+					@if (isAdmin)
+					{
+						@if (!string.IsNullOrEmpty(Model.DNI))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">DNI:</span> @Model.DNI
+							</div>
+						}
+						<div class="mb-3"><span class="fw-bold">Phone:</span> @Model.Phone</div>
+						@if (!string.IsNullOrEmpty(Model.Email))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Email:</span> <a href="mailto:@Model.Email">@Model.Email</a>
+							</div>
+						}
+						@if (!string.IsNullOrEmpty(Model.Address))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Address:</span> @Model.Address
+							</div>
+						}
+						@if (Model.BirthDate.HasValue)
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Birth Date:</span> @Model.BirthDate.Value.ToString("dd-MM-yyyy")
+							</div>
+						}
+						@if (!string.IsNullOrEmpty(Model.AccountNumber))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Account Number:</span> @Model.AccountNumber
+							</div>
+						}
+					}
+					else
+					{
+						<div class="mb-3"><span class="fw-bold">Phone:</span> @Model.Phone</div>
+						@if (!string.IsNullOrEmpty(Model.Email))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Email:</span> <a href="mailto:@Model.Email">@Model.Email</a>
+							</div>
+						}
+					}
+				</div>
+			</div>
+		</div>
+
+		<!-- Other Data -->
+		@if (showOtherData)
+		{
+			<div class="@colClass">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title" style="text-decoration: underline;">
+							@AdministrationDataBase.Resources.Resource.OtherData
+						</h5>
+						@if (Model.IllnessInjuryPathology.HasValue)
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Do you have any type of ailment, injury, or pathology?</span>
+								@(Model.IllnessInjuryPathology.Value ? "YES" : "NO")
+							</div>
+
+							@if (Model.IllnessInjuryPathology.Value && !string.IsNullOrEmpty(Model.DiseaseInjuryPathologyObservations))
+							{
+								<div class="mb-3">
+									<span class="fw-bold">Observations on illness, injury, pathology:</span>
+									@Model.DiseaseInjuryPathologyObservations
+								</div>
+							}
+						}
+						@if (!string.IsNullOrEmpty(Model.OtherObservations))
+						{
+							<div class="mb-3">
+								<span class="fw-bold">Other Observations:</span> @Model.OtherObservations
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+		}
+
+		<!-- Objectives -->
+		@if (showObjectives)
+		{
+			<div class="@colClass">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title" style="text-decoration: underline;">@AdministrationDataBase.Resources.Resource.Objectives</h5>
+						@foreach (var objective in ViewBag.Objectives)
+						{
+							<div class="mb-3">
+								<span class="fw-bold">@objective.Name</span>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+
+
+	@if (TempData["Message"] != null)
+	{
+		var messageType = TempData["MessageType"]?.ToString();
+		<div class="alert @(messageType == "error" ? "alert-danger" : "alert-success")">
+			@TempData["Message"]
+		</div>
+	}
+	<!-- Sessions -->
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title fw-bold">@AdministrationDataBase.Resources.Resource.Sessions</h5>
+					@if (Model.Sessions != null && Model.Sessions.Any())
+					{
+						<div class="table-responsive">
+							<table class="table mt-3 DataTable">
+								<thead>
+									<tr>
+										<th style="width: 20%;">Date and Time</th>
+										<th style="width: 40%;">Observations</th>
+										<th style="width: 40%;"></th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var session in Model.Sessions)
+									{
+										<tr>
+											<td>@session.SessionDate.ToString("dd-MM-yyyy HH:mm")</td>
+											<td>@session.SessionObservations</td>
+											<td class="text-end">
+												<a href="@Url.Action("NotifySession", "PilatesCustomer", new { pilatesCustomerId = Model.Id, sessionId = session.Id })"
+													   class="btn btn-success @(session.SessionDate < DateTime.Now || session.NotificationSent ? "disabled" : "")">
+														@(session.SessionDate < DateTime.Now || session.NotificationSent ? "Notified" : "Notify")
+												</a>
+												<a href="@Url.Action("EditSession", "Session", new { id = session.Id })" class="btn btn-info">Edit</a>
+												<a href="@Url.Action("DeleteSession", "Session", new { id = session.Id })" class="btn btn-danger">Delete</a>
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					}
+					else
+					{
+							<p>No sessions available</p>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+			$('.DataTable').DataTable({
+				"displayLength": 5,
+				"lengthChange": false,
+				"columnDefs": [
+					{ "orderable": true, "targets": [0, 1] },
+					{ "orderable": false, "targets": [2] }
+				],
+				drawCallback: function () {
+					$('.dataTables_paginate ul').addClass('pagination-modern');
+				},
+				language: {
+					url: "@Url.Content("~/assets/lib/datatables.net/i18n/")@(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName).json",
+					searchPlaceholder: 'Search',
+				},
+			});
+		});
+	</script>
+}

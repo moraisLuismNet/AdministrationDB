@@ -1,0 +1,142 @@
+﻿@using AdministrationDataBaseData.Models
+@model User
+
+@{
+    ViewData["Title"] = AdministrationDataBase.Resources.Resource.Users;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Subheader
+{
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor fw-bold" style="color: #777777;">@AdministrationDataBase.Resources.Resource.NewUser</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-end">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb justify-content-end">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@AdministrationDataBase.Resources.Resource.Start</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "User")">@AdministrationDataBase.Resources.Resource.Users</a></li>
+                    <li class="breadcrumb-item active">@AdministrationDataBase.Resources.Resource.NewUser</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form class="mt-4" id="createUser" method="post">
+            <div class="form-group">
+                <label for="Name" class="form-label fw-bold">@AdministrationDataBase.Resources.Resource.Name</label>
+                <input type="text" class="form-control" id="Name" name="Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Email" class="form-label fw-bold">@AdministrationDataBase.Resources.Resource.Email</label>
+                <input type="email" class="form-control" id="Email" name="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Password" class="form-label fw-bold">@AdministrationDataBase.Resources.Resource.Password</label>
+                <input type="password" class="form-control" id="Password" name="Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="PasswordRepeat" class="form-label fw-bold">@AdministrationDataBase.Resources.Resource.PasswordRepeat</label>
+                <input type="password" class="form-control" id="PasswordRepeat" name="PasswordRepeat" />
+                <small id="pswMatch" class="form-text text-danger d-none">@AdministrationDataBase.Resources.Resource.PasswordsDoNotMatch</small>
+            </div>
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary" id="btnSubmit">
+                    @AdministrationDataBase.Resources.Resource.Save
+                </button>
+                <a href="@Url.Action("Index", "User")" class="btn btn-info">
+                    @AdministrationDataBase.Resources.Resource.Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Form validation
+        $("#createUser").validate({
+            rules: {
+                Name: { required: true },
+                Email: { required: true, email: true },
+                Password: { required: true },
+                PasswordRepeat: { required: true, equalTo: "#Password" }
+            },
+            messages: {
+                Name: { required: "@AdministrationDataBase.Resources.Resource.FieldRequired" },
+                Email: {
+                    required: "@AdministrationDataBase.Resources.Resource.FieldRequired",
+                    email: "@AdministrationDataBase.Resources.Resource.InvalidEmailFormat"
+                },
+                Password: { required: "@AdministrationDataBase.Resources.Resource.FieldRequired" },
+                PasswordRepeat: {
+                    required: "@AdministrationDataBase.Resources.Resource.FieldRequired",
+                    equalTo: "@AdministrationDataBase.Resources.Resource.PasswordsDoNotMatch"
+                }
+            },
+            errorElement: "div",
+            errorClass: "text-danger",
+            highlight: function (element) {
+                $(element).addClass("is-invalid");
+            },
+            unhighlight: function (element) {
+                $(element).removeClass("is-invalid");
+            },
+            errorPlacement: function (error, element) {
+                error.insertAfter(element);
+            }
+        });
+
+        // Function to verify passwords match when typing
+        function checkPasswordsMatch() {
+            var psw = $("#Password").val();
+            var pswRepeat = $("#PasswordRepeat").val();
+
+            if (psw !== pswRepeat) {
+                $("#pswMatch").removeClass("d-none");
+                $("#btnSubmit").prop("disabled", true);
+            } else {
+                $("#pswMatch").addClass("d-none");
+                $("#btnSubmit").prop("disabled", false);
+            }
+        }
+
+        $("#Password, #PasswordRepeat").on("keyup", checkPasswordsMatch);
+
+        // Submit form via AJAX
+        $("#createUser").on("submit", function (e) {
+            e.preventDefault();
+
+            if ($(this).valid()) {
+                var form = $(this)[0];
+                var formData = new FormData(form);
+
+                $.ajax({
+                    url: "@Url.Action("Create", "User")",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function () {
+                        location.href = "@Url.Action("Index", "User")";
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: "error",
+                            title: "@AdministrationDataBase.Resources.Resource.ErrorCreateUser",
+                            html: "@AdministrationDataBase.Resources.Resource.EmailNoRepeat",
+                            confirmButtonText: "@AdministrationDataBase.Resources.Resource.Accept",
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+}
