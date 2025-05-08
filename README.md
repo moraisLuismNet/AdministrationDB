@@ -27,3 +27,5 @@ builder.Services.AddDbContext<BDContext>(options =>
     "Connection": "Data Source=AdministrationDB.db"
 }
 ``` 
+
+[DeepWiki moraisLuismNet/AdministrationDB](https://deepwiki.com/moraisLuismNet/AdministrationDB)
