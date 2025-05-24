@@ -42,16 +42,16 @@ namespace AdministrationDataBase.Helpers
         public static User GetUserByEmail(BDContext db, string email)
         {
             return db.Users.FirstOrDefault(u => u.Email == email);
-		}
+		    }
 
         public static int GetUserId(ClaimsPrincipal User)
         {
             return int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-		}
+		    }
 
-		public static bool IsMe(ClaimsPrincipal User, int userId)
+		    public static bool IsMe(ClaimsPrincipal User, int userId)
         {
             return (GetUserId(User) == userId);
-		}
+		    }
     }
 }
