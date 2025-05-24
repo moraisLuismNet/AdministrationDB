@@ -1,128 +1,109 @@
 ## AdministrationDB
 
 ![AdministrationDB](img/UML_1.png)
-
-AdministrationDataBase/
-├── Controllers/
-│ ├── AccountController.cs
-│ ├── HomeController.cs
-│ ├── MassageController.cs
-│ ├── MassagesCustomerController.cs
-│ ├── ObjectiveController.cs
-│ ├── PathologyControllerPilates.cs
-│ ├── PilatesCustomerController.cs
-│ ├── SessionController.cs
-│ └── UserController.cs
-│
-├── Helpers/
-│ ├── AdminHelper.cs
-│ ├── CsvExportHelper.cs
-│ ├── DateHelper.cs
-│ ├── EmailHelper.cs
-│ ├── HashHelper.cs
-│ ├── NotificationHelper.cs
-│ ├── PdfExportHelper.cs
-│ ├── TemplateHelper.cs
-│ └── UserHelper.cs
-│
-├── Views/
-│ ├── Account/
-│ │ ├── ChangePassword.cshtml
-│ │ └── Login.cshtml
-│ │
-│ ├── Home/
-│ │ └── Index.cshtml
-│ │
-│ ├── Massage/
-│ │ ├── CreateMassage.cshtml
-│ │ ├── DeleteMassage.cshtml
-│ │ └── EditMassage.cshtml
-│ │
-│ ├── MassagesCustomer/
-│ │ ├── CreateMassagesCustomer.cshtml
-│ │ ├── DeleteMassagesCustomer.cshtml
-│ │ ├── DetailsMassagesCustomer.cshtml
-│ │ ├── EditMassagesCustomer.cshtml
-│ │ └── Index.cshtml
-│ │
-│ ├── Objective/
-│ │ ├── CreateObjective.cshtml
-│ │ ├── DeleteObjective.cshtml
-│ │ ├── EditObjective.cshtml
-│ │ └── Index.cshtml
-│ │
-│ ├── Pathology/
-│ │ ├── CreatePathology.cshtml
-│ │ ├── DeletePathology.cshtml
-│ │ ├── EditPathology.cshtml
-│ │ └── Index.cshtml
-│ │
-│ ├── PilatesCustomer/
-│ │ ├── CreatePilatesCustomer.cshtml
-│ │ ├── DeletePilatesCustomer.cshtml
-│ │ ├── DetailsPilatesCustomer.cshtml
-│ │ ├── EditPilatesCustomer.cshtml
-│ │ └── Index.cshtml
-│ │
-│ ├── Session/
-│ │ ├── CreateSession.cshtml
-│ │ ├── DeleteSession.cshtml
-│ │ └── EditSession.cshtml
-│ │
-│ ├── Shared/
-│ │ ├── _Footer.cshtml
-│ │ ├── _Header.cshtml
-│ │ ├── _Layout.cshtml
-│ │ ├── _LayoutLogin.cshtml
-│ │ └── _Sidebar.cshtml
-│ │
-│ └── User/
-│ ├── CreateUser.cshtml
-│ ├── EditUser.cshtml
-│ └── Index.cshtml
-│
-├── Data/
-│ ├── Context/
-│ │ ├── BDContext.cs
-│ │ └── Connect.cs
-│ │
-│ └── Models/
-│ ├── Massage.cs
-│ ├── MassagesCustomer.cs
-│ ├── MassagesCustomerPathology.cs
-│ ├── MassagesCustomerViewModel.cs
-│ ├── Objective.cs
-│ ├── Observation.cs
-│ ├── Pathology.cs
-│ ├── PilatesCustomer.cs
-│ ├── PilatesCustomerObjective.cs
-│ ├── PilatesCustomerViewModel.cs
-│ ├── Session.cs
-│ └── User.cs
-│
-├── appsettings.json
-└── Program.cs
-
 ![AdministrationDB](img/UML_2.png)
 
-AdministrationDataBaseData/
-├── Context/
-│   ├── BDContext.cs
-│   └── Connect.cs
-└── Models/
-    ├── Massage.cs
-    ├── MassagesCustomer.cs
-    ├── MassagesCustomerPathology.cs
-    ├── MassagesCustomerViewModel.cs
-    ├── Objective.cs
-    ├── Observation.cs
-    ├── Pathology.cs
-    ├── PilatesCustomer.cs
-    ├── PilatesCustomerObjective.cs
-    ├── PilatesCustomerViewModel.cs
-    ├── Session.cs
-    └── User.cs
-		
+AdministrationDataBase/  
+├── Controllers/  
+│ ├── AccountController.cs  
+│ ├── HomeController.cs  
+│ ├── MassageController.cs  
+│ ├── MassagesCustomerController.cs  
+│ ├── ObjectiveController.cs  
+│ ├── PathologyControllerPilates.cs  
+│ ├── PilatesCustomerController.cs  
+│ ├── SessionController.cs  
+│ └── UserController.cs  
+│  
+├── Helpers/  
+│ ├── AdminHelper.cs  
+│ ├── CsvExportHelper.cs  
+│ ├── DateHelper.cs  
+│ ├── EmailHelper.cs  
+│ ├── HashHelper.cs  
+│ ├── NotificationHelper.cs  
+│ ├── PdfExportHelper.cs  
+│ ├── TemplateHelper.cs  
+│ └── UserHelper.cs  
+│  
+├── Views/  
+│ ├── Account/  
+│ │ ├── ChangePassword.cshtml  
+│ │ └── Login.cshtml  
+│ │  
+│ ├── Home/  
+│ │ └── Index.cshtml  
+│ │  
+│ ├── Massage/  
+│ │ ├── CreateMassage.cshtml  
+│ │ ├── DeleteMassage.cshtml  
+│ │ └── EditMassage.cshtml  
+│ │  
+│ ├── MassagesCustomer/  
+│ │ ├── CreateMassagesCustomer.cshtml  
+│ │ ├── DeleteMassagesCustomer.cshtml  
+│ │ ├── DetailsMassagesCustomer.cshtml  
+│ │ ├── EditMassagesCustomer.cshtml  
+│ │ └── Index.cshtml  
+│ │  
+│ ├── Objective/  
+│ │ ├── CreateObjective.cshtml  
+│ │ ├── DeleteObjective.cshtml  
+│ │ ├── EditObjective.cshtml  
+│ │ └── Index.cshtml  
+│ │  
+│ ├── Pathology/  
+│ │ ├── CreatePathology.cshtml  
+│ │ ├── DeletePathology.cshtml  
+│ │ ├── EditPathology.cshtml  
+│ │ └── Index.cshtml  
+│ │  
+│ ├── PilatesCustomer/  
+│ │ ├── CreatePilatesCustomer.cshtml  
+│ │ ├── DeletePilatesCustomer.cshtml  
+│ │ ├── DetailsPilatesCustomer.cshtml  
+│ │ ├── EditPilatesCustomer.cshtml  
+│ │ └── Index.cshtml  
+│ │  
+│ ├── Session/  
+│ │ ├── CreateSession.cshtml  
+│ │ ├── DeleteSession.cshtml  
+│ │ └── EditSession.cshtml  
+│ │  
+│ ├── Shared/  
+│ │ ├── _Footer.cshtml  
+│ │ ├── _Header.cshtml  
+│ │ ├── _Layout.cshtml  
+│ │ ├── _LayoutLogin.cshtml  
+│ │ └── _Sidebar.cshtml  
+│ │  
+│ └── User/  
+│ ├── CreateUser.cshtml  
+│ ├── EditUser.cshtml  
+│ └── Index.cshtml  
+│  
+├── Data/  
+│ ├── Context/   
+│ │ ├── BDContext.cs        
+│ │ └── Connect.cs        
+│ │        
+│ └── Models/        
+│ ├── Massage.cs        
+│ ├── MassagesCustomer.cs        
+│ ├── MassagesCustomerPathology.cs      
+│ ├── MassagesCustomerViewModel.cs      
+│ ├── Objective.cs      
+│ ├── Observation.cs      
+│ ├── Pathology.cs      
+│ ├── PilatesCustomer.cs      
+│ ├── PilatesCustomerObjective.cs      
+│ ├── PilatesCustomerViewModel.cs      
+│ ├── Session.cs      
+│ └── User.cs      
+│      
+├── appsettings.json      
+└── Program.cs      
+
 ![AdministrationDB](img/01.png)
 ![AdministrationDB](img/02.png)
 ![AdministrationDB](img/03.png)
