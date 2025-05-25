@@ -1,5 +1,13 @@
 ## AdministrationDB
 
+**AdministrationDB** is an integrated management system that enables wellness practitioners to:  
+
+- Maintain comprehensive customer records  
+- Schedule and manage appointments and sessions  
+- Track health-related information (such as pathologies and objectives)  
+- Send appointment notifications  
+- Export data for analysis and reporting  
+
 ![AdministrationDB](img/UML_1.png)
 ![AdministrationDB](img/UML_2.png)
 
