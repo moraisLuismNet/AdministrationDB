@@ -1,15 +1,9 @@
 ## AdministrationDB
 
-**AdministrationDB** is an integrated management system that enables wellness practitioners to:  
+**AdministrationDB** is an Web application for managing information related to Massage and Pilates clients. The integrated management system that enables: Maintain comprehensive customer records, Schedule and manage appointments and sessions, Track health-related information (such as pathologies and objectives), Send appointment notifications and Export data for analysis and reporting. The application also supports user authentication and authorization.
 
-- Maintain comprehensive customer records  
-- Schedule and manage appointments and sessions  
-- Track health-related information (such as pathologies and objectives)  
-- Send appointment notifications  
-- Export data for analysis and reporting  
 
-![AdministrationDB](img/UML_1.png)
-![AdministrationDB](img/UML_2.png)
+![AdministrationDB](img/UML.png)
 
 AdministrationDataBase/  
 ├── Controllers/  
@@ -122,7 +116,7 @@ AdministrationDataBase/
 ![AdministrationDB](img/08.png)
 ![AdministrationDB](img/09.png)
 ![AdministrationDB](img/10.png)
-![AdministrationDB](img/10.png)
+![AdministrationDB](img/11.png)
 
 
 ## Program
@@ -139,5 +133,7 @@ builder.Services.AddDbContext<BDContext>(options =>
     "Connection": "Data Source=AdministrationDB.db"
 }
 ``` 
+
+![AdministrationDB](img/DB.png)
 
 [DeepWiki moraisLuismNet/AdministrationDB](https://deepwiki.com/moraisLuismNet/AdministrationDB)
